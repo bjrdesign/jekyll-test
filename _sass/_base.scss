@@ -1,0 +1,191 @@
+/**
+ * Reset some basic elements
+ */
+body, h1, h2, h3, h4, h5, h6,
+p, blockquote, pre, hr,
+dl, dd, ol, ul, figure {
+    margin: 0;
+    padding: 0;
+}
+
+.site-title{font-size:2rem;}
+
+/**
+ * Basic styling
+ */
+*{box-sizing: border-box;} 
+ 
+body {
+    font-family: $base-font-family;
+    font-size: $base-font-size;    
+    line-height: $base-line-height;
+    font-weight: 300;
+    color: $text-color;
+    background-color: $background-color;
+    -webkit-text-size-adjust: 100%;
+}
+
+
+
+/**
+ * Set `margin-bottom` to maintain vertical rhythm
+ */
+h1, h2, h3, h4, h5, h6,
+p, blockquote, pre,
+ul, ol, dl, figure,
+%vertical-rhythm {
+    margin-bottom: $spacing-unit / 2;
+}
+
+/**
+ * Images
+ */
+img {
+    max-width: 100%;
+    vertical-align: middle;
+}
+
+
+/**
+ * Links
+ */
+a {
+    color: $brand-color;
+    text-decoration: none;
+
+    &:visited {
+        color: darken($brand-color, 15%);
+    }
+
+    &:hover {
+        color: $text-color;
+        text-decoration: underline;
+    }
+}
+
+#hero{
+	background: url(../images/van.jpg) no-repeat;
+	background-size: cover;
+	background-position: center 65%;
+	color:$white;
+	a{color:$white}
+	.t-hero-title{font-size:3rem; padding:6rem 0; text-align: center;}
+}
+
+/**
+ * Footer
+ */
+ footer{
+ 	 border-top:1px solid $grey-color;
+	 .column-two{background: $background-color; font-size:0.75rem; color:$grey-color;
+		 &.last{text-align: right;}
+	 }
+ }
+
+/**
+ * Wrapper
+ */
+.wrapper {
+	max-width:92%;
+    margin-right: auto;
+    margin-left: auto;
+    @extend %clearfix;
+}
+
+
+@include mobile-first($l){
+	.wrapper{max-width:$l;}
+}
+
+
+/**
+ * Clearfix
+ */
+%clearfix {
+
+    &:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
+
+
+/**
+ * Menu Button
+ */
+ 
+$button-size : 2rem; 
+$transition: .3s; // increase this to see the transformations in slow-motion
+ 
+.lines-button {
+  display: inline-block;
+  padding: $button-size/2 $button-size/4;
+  transition: .3s;
+  cursor: pointer;
+  user-select: none;
+  border-radius: $button-size/7;
+  background: transparent;
+  border: 0;
+  outline: none;
+  position: absolute;
+  right: 20px;
+ 
+  &:hover {
+    opacity: 1;
+  }
+ 
+  &:active {
+    transition: 0;
+    background: rgba(0,0,0,.1);
+  }
+}
+
+@mixin line {
+  display: inline-block;
+  width: $button-size;
+  height: $button-size/7;
+  background: $white;
+  border-radius: $button-size/14; 
+  transition: $transition;
+}
+
+.lines {
+  //create middle line
+  @include line;
+  position: relative; 
+ 
+  /*create the upper and lower lines as pseudo-elements of the middle line*/
+  &:before, &:after {
+   
+   @include line;
+    position: absolute;
+      left:0;
+    content: '';
+    transform-origin: $button-size/14 center;
+  }
+  &:before { top: $button-size/4; }
+  &:after { top: -$button-size/4; }
+}
+
+
+.lines-button.close .lines{
+ 
+    /*hide the middle line*/
+    background: transparent;
+ 
+    /*overlay the lines by setting both their top values to 0*/
+    &:before, &:after{
+      transform-origin: 50% 50%;
+      top:0;
+      width: $button-size;
+    }
+ 
+    // rotate the lines to form the x shape
+    &:before{
+      transform: rotate3d(0,0,1,45deg);
+    }
+    &:after{
+      transform: rotate3d(0,0,1,-45deg);
+    }
+}

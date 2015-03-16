@@ -1,0 +1,27 @@
+/**
+Layout Styles
+***/
+.column-three{
+	width:100%;
+	min-height:3rem;
+	padding:0.5rem;
+	background: $grey-color-light;
+}
+
+.column-two{
+	width:49.5%;
+	padding:0.5rem;
+	float:left;
+	margin-right:1%;
+	background:$grey-color-light;
+	&.last{margin-right:0;}
+}
+
+@include mobile-first($m) {
+	.column-three{
+	  float:left;
+	  width:32.66%;
+	  margin-right:1%;
+	  &.last{margin-right:0;}
+	}
+}
